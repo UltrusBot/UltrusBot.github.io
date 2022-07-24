@@ -1,0 +1,84 @@
+:root {
+    --site-background-color: #161618;
+    --site-background-color-stripe: #261C2C;
+    --site-background-accent: #3B3B40;
+    --site-background-light-accent: #62626a;
+    --site-text-color: #fff;
+    --site-text-accent: #FF88DC;
+    --modrinth: #00d845
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        --site-background-accent: #cdcddb;
+        --site-background-color-stripe: #F9F9F9;
+        --site-text-accent: #b93f95;
+        --site-background-color: #fff;
+        --site-text-color: #000;
+        ---modrinth: #30b27c
+    }
+}
+img {
+    image-rendering: auto;
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
+    image-rendering: -webkit-optimize-contrast;
+  }
+html {
+    background: var(--site-background-color) repeating-linear-gradient(
+            45deg,
+            var(--site-background-color),
+            var(--site-background-color) 20px,
+            var(--site-background-color-stripe) 20px,
+            var(--site-background-color-stripe) 40px
+    );
+    color: var(--site-text-color);
+    text-align: center;
+}
+a {
+    color: var(--site-text-accent)
+}
+.mod {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--site-background-accent);
+    border-radius: 5px;
+    margin: 1em auto;
+}
+@media (min-width:1025px) {
+    .mod {
+        width: 50%;
+    }
+}
+.mod:hover {
+    box-shadow: 2px 2px 2px 2px var(--site-background-light-accent);
+}
+.mod img {
+    height: 128px;
+    width: 128px;
+}
+.modinfo {
+    display: flex;
+    flex-direction: row;
+    box-shadow: #62626a;
+}
+.modinfo > div {
+    flex: 1 1 auto;
+    padding: 1em;
+}
+.github {
+    fill: #9921fe;
+}
+.modrinth {
+    fill: var(--modrinth);
+}
+.curseforge {
+    fill: #fc785b   
+}
+.modinfo > a {
+    padding: 0.5em;
+}
+.mod > :not(:first-child){
+    border-top: var(--site-background-light-accent) 1px solid;
+}
