@@ -49,6 +49,6 @@ function draw() {
     push();
     noStroke();
     fill(options.textColor)
-    text(options.text, 300, options.outlineWidth * 2, 724, 200)
+    text(options.text, 300, 0, 724, 281)
     pop();
 }
