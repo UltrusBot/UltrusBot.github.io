@@ -11,6 +11,7 @@ const options = {
     iconURL: "https://github.com/QuiltMC/art/blob/master/brand/512png/quilt_logo_transparent.png?raw=true",
     text: "Supported on \nQuilt Loader",
     "Refresh Image": function() {
+        iconImage.remove();
         iconImage = createImg(options.iconURL);
         iconImage.hide();
     }
