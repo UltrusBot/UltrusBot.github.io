@@ -50,6 +50,9 @@ a {
     .mod {
         width: 50%;
     }
+    .sidenav {
+        width: 40%;
+    }
 }
 .mod:hover {
     box-shadow: 2px 2px 2px 2px var(--site-background-light-accent);
@@ -81,4 +84,51 @@ a {
 }
 .mod > :not(:first-child){
     border-top: var(--site-background-light-accent) 1px solid;
+}
+
+/* I hate CSS TODO: Make this better */
+.sidenav {
+    height: 100%;
+    width: 20%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    font-size: 1em;
+    background-color: var(--site-background-color);
+    overflow-x: hidden;
+    transition: all 0.5s linear;
+    padding-top: 60px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+}
+.sidenav ul {
+    padding: 0;
+    list-style: none;
+}
+.sidenav ul li a {
+    display: block;
+    padding: 8px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: var(--site-text-color);
+    transition: all 0.5s linear;
+}
+.sidenav ul li a:hover {
+    color: var(--site-text-accent);
+    background-color: var(--site-background-light-accent);
+}
+
+#kofi {
+    align-self: flex-end;
+}
+
+@media screen and (max-width: 600px) {
+    .sidenav {
+        visibility: hidden;
+        clear: both;
+        float: left;
+        margin: 10px auto 5px 20px;
+        width: 28%;
+        display: none;
+    }
 }
