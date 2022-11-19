@@ -16,13 +16,16 @@ const options = {
     },
     "Save Image": function() {
         saveCanvas("mountains", "png");
+    },
+    "Copy Shareable Link": function() {
+        writeOptionsToUrl();
+        navigator.clipboard.writeText(window.location.href);
     }
 }
 let urlParams = new URLSearchParams(window.location.search);
 console.log(urlParams)
 for (let option of Object.keys(options)) {
     if (urlParams.has(option)) {
-        console.log("Found option " + option + " with value " + urlParams.get(option));
         if (option == "end" || option == "middle" || option == "start" || option == "skyTop" || option == "skyBottom") {
             options[option] = "#" + urlParams.get(option);
         } else {
@@ -32,26 +35,26 @@ for (let option of Object.keys(options)) {
 }
 const gui = new dat.GUI();
 let guiOptions = [
-    gui.addColor(options, "end").onChange(() => optionChange()),
-    gui.addColor(options, "middle").onChange(() => optionChange()),
-    gui.addColor(options, "start").onChange(() => optionChange()),
-    gui.addColor(options, "skyTop").onChange(() => optionChange()),
-    gui.addColor(options, "skyBottom").onChange(() => optionChange()),
-    gui.add(options, "skyMultiplier").onChange(() => optionChange()),
-    gui.add(options, "xChangeMin").onChange(() => optionChange()),
-    gui.add(options, "xChangeMax").onChange(() => optionChange()),
-    gui.add(options, "yChangeMin").onChange(() => optionChange()),
-    gui.add(options, "yChangeMax").onChange(() => optionChange()),
-    gui.add(options, "ranges").onChange(() => optionChange()),
+    gui.addColor(options, "end"),
+    gui.addColor(options, "middle"),
+    gui.addColor(options, "start"),
+    gui.addColor(options, "skyTop"),
+    gui.addColor(options, "skyBottom"),
+    gui.add(options, "skyMultiplier"),
+    gui.add(options, "xChangeMin"),
+    gui.add(options, "xChangeMax"),
+    gui.add(options, "yChangeMin"),
+    gui.add(options, "yChangeMax"),
+    gui.add(options, "ranges"),
     gui.add(options, "Refresh Image"),
-    gui.add(options, "Save Image")
+    gui.add(options, "Save Image"),
+    gui.add(options, "Copy Shareable Link")
 ]
-function optionChange() {
+function writeOptionsToUrl() {
     let url = "?";
     for (let option of guiOptions) {
-        if (option.property !== "Refresh Image" && option.property !== "Save Image") {
+        if (option.property !== "Refresh Image" && option.property !== "Save Image" && option.property !== "Copy Shareable Link") {
             let opt = (options[option.property]);
-
             if (typeof opt === "string" && opt.startsWith("#")) {
                 opt = opt.substring(1);
             }
