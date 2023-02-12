@@ -29,7 +29,7 @@ gui.add(options, "iconURL")
 gui.add(options, "Refresh Image")
 
 function setup() {
-    createCanvas(1024, 281)
+    createCanvas(859, 288)
     iconImage = createImg(options.iconURL);
     iconImage.hide();
     imageMode(CENTER)
@@ -43,12 +43,12 @@ function draw() {
     strokeWeight(options.outlineWidth)
     rect(options.outlineWidth/2, options.outlineWidth/2, width-options.outlineWidth, height-options.outlineWidth, 20)
     if (options.hasIcon) {
-        image(iconImage, 1024/2 - 1024/3, height/2, 200, 200)
+        image(iconImage, 859/2 - 859/3, height/2, 200, 200)
     }
     textStyle(options.textType)
     push();
     noStroke();
     fill(options.textColor)
-    text(options.text, 300, 0, 724, 281)
+    text(options.text, 300, 0, 724, 288)
     pop();
 }
