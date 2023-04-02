@@ -17,11 +17,23 @@
     <script src="https://cdn.jsdelivr.net/npm/p5@1.4.2/lib/p5.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.9/dat.gui.min.js" integrity="sha512-WoO4Ih0CDOSLYafy22wZD/mcJ7k0ESLqtQsFa6zFKnEUrbtuGU+GkLtVhgt93xa2qewG5gKEC6CWlN8OaCTSVg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://kit.fontawesome.com/e7ecb0423e.js" crossorigin="anonymous"></script>
-
+    <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document
+                .documentElement
+                .classList
+                .add('dark')
+        } else {
+            document
+                .documentElement
+                .classList
+                .remove('dark')
+        }
+    </script>
 </head>
 
 <body>
-    <div class="striped-bg w-screen h-screen dark:text-white flex">
+    <div class="striped-bg-light dark:striped-bg-dark w-screen h-screen dark:text-white flex">
         <aside
         class="hidden lg:inline bg-slate-300 dark:bg-neutral-900 w-1/6 h-auto text-center basis-1/6 drop-shadow-lg">
         <div class="pt-5">
@@ -69,7 +81,7 @@
         </div>
     </div>
 <script type="module" src="/src/main.ts"></script>
-<script src="/src/badgecreator.js"></script>
+<script src="/badgecreator/badgecreator.js"></script>
 </body>
 
 </html>

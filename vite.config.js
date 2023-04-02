@@ -8,6 +8,7 @@ export default defineConfig({
         main: resolve(__dirname, 'index.html'),
         missingwilds: resolve(__dirname, 'missingwilds/index.html'),
         badgecreator: resolve(__dirname, 'badgecreator/index.html'),
+        mountains: resolve(__dirname, 'mountains/index.html'),
       },
     },
   },
