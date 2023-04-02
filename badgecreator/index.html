@@ -7,8 +7,6 @@
 
     <title>Badge Creator</title>
     <link rel="icon" type="image/x-icon" href="/images/favicon.png">
-    <link rel="stylesheet" href="/assets/css/style.css">
-
     <meta name="description" content="Create badges for mod pages.">
     <meta property="og:title" content="Mod Badge Creator">
     <meta property="og:description" content="Mod Badge Creator">
@@ -18,23 +16,60 @@
     <link rel="canonical" href="https://www.ultrusmods.me/badgecreator">
     <script src="https://cdn.jsdelivr.net/npm/p5@1.4.2/lib/p5.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.9/dat.gui.min.js" integrity="sha512-WoO4Ih0CDOSLYafy22wZD/mcJ7k0ESLqtQsFa6zFKnEUrbtuGU+GkLtVhgt93xa2qewG5gKEC6CWlN8OaCTSVg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://kit.fontawesome.com/e7ecb0423e.js" crossorigin="anonymous"></script>
+
 </head>
 
 <body>
-<div class="sidenavcontainer">
-    <div class="sidenav">
-        <div class="banner">
-            <h1>UltrusMods</h1>
+    <div class="striped-bg w-screen h-screen dark:text-white flex">
+        <aside
+        class="hidden lg:inline bg-slate-300 dark:bg-neutral-900 w-1/6 h-auto text-center basis-1/6 drop-shadow-lg">
+        <div class="pt-5">
+            <img
+                src="https://raw.githubusercontent.com/UltrusBot/Images/main/ultrus.png"
+                class="w-20 h-20 rounded-full mx-auto"
+                alt="UltrusBot">
         </div>
-        <ul>
-            <li><a href="./">Home</a></li>
-            <li><a href="/badgecreator">Badge Creator</a></li>
+        <h1 class="font-bold text-3xl py-7 font-serif">UltrusMods</h1>
+        <ul class="">
+            <li class="sidebar-entry">
+                <a href="/">Home</a>
+            </li>
+            <li class="sidebar-entry">
+                <a href="/badgecreator/">Badge Creator</a>
+            </li>
+            <li class="sidebar-entry">
+                <a href="/mountains/">Mountains Generator</a>
+            </li>
         </ul>
-        <a href='https://ko-fi.com/D1D05WHME' target='_blank' id="kofi"><img height='36' style='border:0px;height:36px;' src='https://cdn.ko-fi.com/cdn/kofi1.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>        </div>
-</div>
-<h1>Mod Page Badge Creator</h1>
-<p>Create mod page badges.</p>
-<script src="./script.js"></script>
+        
+    <div id="linkIcons">
+        <a href="https://twitter.com/UltrusBot">
+            <i class="fa-brands fa-twitter"></i>
+        </a>
+        <a href="https://youtube.com/@UltrusBot">
+            <i class="fa-brands fa-youtube"></i>
+        </a>
+        <a rel="me" href="https://craftodon.social/@UltrusBot">
+            <i class="fa-brands fa-mastodon"></i>
+        </a>
+        <a href="https://discord.gg/GJSGb335v4">
+            <i class="fa-brands fa-discord"></i>
+        </a>
+        <a href="https://github.com/UltrusBot/">
+            <i class="fa-brands fa-github"></i>
+        </a>
+    </div>
+    <a class="flex justify-center" href='https://ko-fi.com/D1D05WHME' target='_blank' id="kofi"><img height='48' style='border:0px;height:48px;' src='https://cdn.ko-fi.com/cdn/kofi1.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
+    </aside>
+        <div class="lg:basis-5/6">
+            <h1 class="text-center mt-10 font-semibold text-3xl">Badge Creator</h1>
+            <p class="text-center">Create badges for projects</p>
+            <div class="flex mt-5 justify-center"  id="canvas"></div>
+        </div>
+    </div>
+<script type="module" src="/src/main.ts"></script>
+<script src="/src/badgecreator.js"></script>
 </body>
 
 </html>

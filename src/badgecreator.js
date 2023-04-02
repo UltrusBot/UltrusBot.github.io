@@ -1,10 +1,11 @@
-
+// TODO: Remake this code, make custom GUI system, so I can add dynamic options,
+// Like switching the color options between Solid Color, and Gradient
 let iconImage;
 const options = {
     backgroundColor: "#1b112b",
     outlineColor: "#9722ff",
     textColor: "#FFFFFF",
-    fontSize: 80,
+    fontSize: 64,
     textType: "bold",
     outlineWidth: 20,
     hasIcon: true,
@@ -29,7 +30,8 @@ gui.add(options, "iconURL")
 gui.add(options, "Refresh Image")
 
 function setup() {
-    createCanvas(859, 288)
+    const canvas = createCanvas(859, 288)
+    canvas.parent("canvas")
     iconImage = createImg(options.iconURL);
     iconImage.hide();
     imageMode(CENTER)

@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --site-background-color-dark: #161618;
+    --site-background-color-stripe-dark: #261C2C;
+    --site-background-color-light: #FFF;
+    --site-background-color-stripe-light: #F9F9F9;
+    --modrinth: #00d845
+}
+@media (prefers-color-scheme: light) {
+    :root {
+        ---modrinth: #30b27c
+    }
+}
+@layer utilities {
+    .striped-bg-dark {
+    background: var(--site-background-color-dark) repeating-linear-gradient(
+            45deg,
+            var(--site-background-color-dark),
+            var(--site-background-color-dark) 20px,
+            var(--site-background-color-stripe-dark) 20px,
+            var(--site-background-color-stripe-dark) 40px
+    ) !important;
+    }
+}
+@layer utilities {
+    .striped-bg-light {
+    background: var(--site-background-color-light) repeating-linear-gradient(
+            45deg,
+            var(--site-background-color-light),
+            var(--site-background-color-light) 20px,
+            var(--site-background-color-stripe-light) 20px,
+            var(--site-background-color-stripe-light) 40px
+    ) !important;
+    }
+}
+
+.sidebar-entry {
+    @apply my-1 hover:bg-slate-400 dark:hover:bg-neutral-600 flex
+}
+.sidebar-entry a {
+    @apply flex-1 py-1
+}
+
+#linkIcons i {
+    @apply text-4xl
+}
+#linkIcons {
+    @apply my-3
+}
+.fa-twitter {
+    color: #1DA1F2;
+}
+.fa-youtube {
+    color: #EA3223
+}
+.fa-mastodon {
+    color: #6364FF
+}
+.fa-discord {
+    color: #5865F2
+}
+.fa-github {
+    color: #9921fe
+}
+
+
+/* Mod Info Box */
+.modinfo {
+    @apply bg-slate-300 dark:bg-zinc-700 mt-5 p-4 rounded-md mx-5 hover:shadow-md hover:shadow-neutral-500 
+}
+.modinfo > div > img {
+    @apply w-32 h-32 drop-shadow-lg rounded-lg
+}
+.modinfo > div > div > h1 {
+    @apply text-lg
+}
+.modinfo a {
+    @apply text-pink-700 dark:text-pink-400 underline
+}
+.modlinks {
+    @apply flex border-t-2 border-zinc-600 mt-2 
+}
+.github {
+    fill: #9921fe;
+}
+.modrinth {
+    fill: var(--modrinth);
+}
+.curseforge {
+    fill: #fc785b   
+}
+.modinfo svg {
+    @apply mr-4 mt-2 drop-shadow-lg
+}
