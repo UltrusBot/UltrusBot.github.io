@@ -69,10 +69,10 @@
 
 /* Mod Info Box */
 .modinfo {
-    @apply bg-slate-300 dark:bg-zinc-700 mt-5 p-4 rounded-md mx-5 hover:shadow-md hover:shadow-neutral-500 
+    @apply bg-slate-300 dark:bg-zinc-700 mt-5 p-4 rounded-md mx-3 hover:shadow-md hover:shadow-neutral-500 relative flex flex-col
 }
 .modinfo > div > img {
-    @apply w-32 h-32 drop-shadow-lg rounded-lg
+    @apply w-24 h-24 drop-shadow-lg rounded-lg
 }
 .modinfo > div > div > h1 {
     @apply text-lg
@@ -81,7 +81,8 @@
     @apply text-pink-700 dark:text-pink-400 underline
 }
 .modlinks {
-    @apply flex border-t-2 border-zinc-600 mt-2 
+    /* Make float to bottom */
+    @apply flex border-t-2 border-zinc-600 mt-auto
 }
 .github {
     fill: #9921fe;
