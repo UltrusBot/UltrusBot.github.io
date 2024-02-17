@@ -1,0 +1,171 @@
+---
+import Layout from "./Layout.astro";
+interface Props {
+    title: string;
+    description: string;
+}
+
+const { title, description  } = Astro.props;
+---
+
+<Layout title={title} description={description}>
+    <div class="striped-bg-light dark:striped-bg-dark w-screen min-h-screen text-gray-800 dark:text-white flex flex-col md:flex-row">
+        <aside class="hidden md:inline bg-slate-300 dark:bg-neutral-900 w-1/6 h-auto text-center basis-1/6 drop-shadow-lg">
+            <div class="pt-5">
+                <img src="https://raw.githubusercontent.com/UltrusBot/Images/main/ultrus.png" class="w-20 h-20 rounded-full mx-auto" alt="UltrusBot">
+            </div>
+            <h1 class="font-bold text-3xl py-7 font-serif">UltrusMods</h1>
+            <ul class="">
+                <li class="sidebar-entry">
+                    <a href="/">Home</a>
+                </li>
+                <li class="sidebar-entry">
+                    <a href="/badgecreator/">Badge Creator</a>
+                </li>
+                <li class="sidebar-entry">
+                    <a href="/mountains/">Mountains Generator</a>
+                </li>
+                <li class="sidebar-entry">
+                    <a href="/blog/">Blog</a>
+                </li>
+            </ul>
+
+            <div id="linkIcons" class="space-x-1 my-2.5">
+                <a href="https://twitter.com/UltrusBot">
+                    <i class="fa-brands fa-twitter"></i>
+                </a>
+                <a href="https://youtube.com/@UltrusBot">
+                    <i class="fa-brands fa-youtube"></i>
+                </a>
+                <a rel="me" href="https://craftodon.social/@UltrusBot">
+                    <i class="fa-brands fa-mastodon"></i>
+                </a>
+                <a href="https://discord.gg/GJSGb335v4">
+                    <i class="fa-brands fa-discord"></i>
+                </a>
+                <a href="https://github.com/UltrusBot/">
+                    <i class="fa-brands fa-github"></i>
+                </a>
+            </div>
+            <a class="flex justify-center mt-5" href="https://ko-fi.com/D1D05WHME" target="_blank" id="kofi"><img height="48" style="border:0px;height:48px;" src="https://cdn.ko-fi.com/cdn/kofi1.png?v=3" border="0" alt="Buy Me a Coffee at ko-fi.com"></a>
+            <!-- Theme Toggle: -->
+            <button class="w-10 h-10 mt-5" id="theme-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="hidden dark:inline w-max h-max">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"></path>
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="dark:hidden w-max h-max">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"></path>
+                </svg>
+            </button>
+        </aside>
+        <div class="md:hidden w-full">
+            <div class="navbar menu bg-slate-300 dark:bg-neutral-900 w-full h-auto text-center drop-shadow-lg flex flex-row">
+                <div>
+                    <p class="font-bold font-serif">UltrusMods</p>
+                </div>
+                <!-- Each of the links below here: -->
+                    <ul>
+                        <li class="sidebar-entry">
+                            <a href="/">Home</a>
+                        </li>
+                        <li class="sidebar-entry">
+                            <a href="/badgecreator/">Badge Creator</a>
+                        </li>
+                        <li class="sidebar-entry">
+                            <a href="/mountains/">Mountains Generator</a>
+                        </li>
+                        <li class="sidebar-entry">
+                            <a href="/blog/">Blog</a>
+                        </li>
+                    </ul>
+                <button class="w-10 h-10 mt-5" id="theme-toggle-mobile">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="hidden dark:inline w-max h-max">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"></path>
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="dark:hidden w-max h-max">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="md:basis-5/6">
+            <slot />
+        </div>
+    </div>
+</Layout>
+<script>
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark')
+    } else {
+        document.documentElement.classList.remove('dark')
+    }
+    function toggleTheme() {
+        document.documentElement.classList.toggle('dark')
+        if (event.shiftKey) {
+            localStorage.removeItem('theme')
+        } else {
+            localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light')
+        }
+    }
+    document.getElementById("theme-toggle").addEventListener("click", toggleTheme);
+    document.getElementById("theme-toggle-mobile").addEventListener("click", toggleTheme);
+
+</script>
+<style>
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.fa-twitter {
+    color: #1DA1F2;
+}
+.fa-youtube {
+    color: #EA3223
+}
+.fa-mastodon {
+    color: #6364FF
+}
+.fa-discord {
+    color: #5865F2
+}
+.fa-github {
+    color: #9921fe
+}
+#linkIcons i {
+    @apply text-4xl
+}
+:root {
+    --site-background-color-dark: #161618;
+    --site-background-color-stripe-dark: #261C2C;
+    --site-background-color-light: #FFF;
+    --site-background-color-stripe-light: #F9F9F9;
+}
+@layer utilities {
+    .striped-bg-dark {
+        background: var(--site-background-color-dark) repeating-linear-gradient(
+                45deg,
+                var(--site-background-color-dark),
+                var(--site-background-color-dark) 20px,
+                var(--site-background-color-stripe-dark) 20px,
+                var(--site-background-color-stripe-dark) 40px
+        ) !important;
+    }
+}
+@layer utilities {
+    .striped-bg-light {
+        background: var(--site-background-color-light) repeating-linear-gradient(
+                45deg,
+                var(--site-background-color-light),
+                var(--site-background-color-light) 20px,
+                var(--site-background-color-stripe-light) 20px,
+                var(--site-background-color-stripe-light) 40px
+        ) !important;
+    }
+}
+.sidebar-entry {
+    @apply my-1 hover:bg-slate-400 dark:hover:bg-neutral-600 flex
+}
+.sidebar-entry a {
+    @apply flex-1 py-1
+}
+</style>
+<script src="https://kit.fontawesome.com/e7ecb0423e.js" crossorigin="anonymous"></script>

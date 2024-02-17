@@ -1,0 +1,150 @@
+---
+import { marked } from 'marked';
+import UltrusLayout from "../../layouts/UltrusLayout.astro";
+import {getCFVersions, getMRProject, getMRVersions} from "../../utils/ModHelper";
+import {GalleryImage, Version, Mod, WebpageVersion} from "../../types/mod";
+import ModNavBar from "../../components/ModNavBar.astro";
+import ModVersion from "../../components/ModVersion.astro";
+export async function getStaticPaths() {
+    const mods: Mod[] = await Astro.glob('../../data/mods/*.json');
+    return mods.map(mod => ({params: {mod: mod.modrinth, modData: mod.curseforge}}))
+}
+const mods: Mod[] = await Astro.glob('../../data/mods/*.json');
+const modInfo = mods.find(mod => mod.modrinth === Astro.params.mod);
+const { mod } = Astro.params;
+
+const modData = await getMRProject(mod);
+const gallery: GalleryImage[] = modData.gallery;
+gallery.sort((a, b) => a.ordering - b.ordering);
+
+const modrinthVersions: Version[] = await getMRVersions(mod);
+const curseforgeVersions: Version[] = await getCFVersions(modInfo.curseforge);
+
+const versions: WebpageVersion[] = [];
+/**
+ * This map is a map of version name to version object
+**/
+const versionMap: Map<String, WebpageVersion> = new Map();
+for (const version of modrinthVersions) {
+    const filename = version.files[0].filename;
+    const webpageVersion: WebpageVersion = {
+        version: version.name,
+        minecraftVersions: version.game_versions,
+        filename: filename,
+        modrinthUrl: `https://modrinth.com/mod/${mod}/version/${version.version_number}`,
+        curseforgeUrl: "",
+        date_published: Date.parse(version.date_published)
+    }
+    versionMap.set(filename, webpageVersion);
+
+}
+for (const version of curseforgeVersions) {
+    const filename = version.files[0].filename;
+    if (versionMap.has(filename)) {
+        const webpageVersion = versionMap.get(filename);
+        let curseforgePubDate = Date.parse(version.date_published);
+        if (curseforgePubDate < webpageVersion.date_published) {
+            webpageVersion.date_published = curseforgePubDate;
+        }
+        webpageVersion.curseforgeUrl = `https://www.curseforge.com/minecraft/mc-mods/${modInfo.curseforge}/files/${version.version_number}`;
+    } else {
+        const webpageVersion: WebpageVersion = {
+            version: version.name,
+            minecraftVersions: version.game_versions,
+            filename: filename,
+            modrinthUrl: "",
+            curseforgeUrl: `https://www.curseforge.com/minecraft/mc-mods/${modInfo.curseforge}/files/${version.version_number}`,
+            date_published: Date.parse(version.date_published)
+        }
+        versionMap.set(version.name, webpageVersion);
+    }
+}
+for (const version of versionMap.values()) {
+    versions.push(version);
+}
+versions.sort((a, b) => b.date_published - a.date_published);
+let firstEightVersions = versions.slice(0, 8);
+let restOfVersions = versions.slice(8);
+
+---
+<UltrusLayout title={modData.title} description={modData.description}>
+
+    <div class="leading-6 mt-3 mx-auto w-5/6 bg-slate-400/10 dark:bg-black/25 min-h-screen p-4">
+        <ModNavBar url={Astro.url} key="description"></ModNavBar>
+        <div class="flex flex-col lg:flex-row">
+            <div class="basis-4/5 max-w-fit prose" id="modcontainer">
+                <div set:html={marked.parse(modData.body)}></div>
+                <div class="not-prose">
+                    {
+                        gallery.length > 1 &&
+                            <div class="w-1/2 mx-auto text-center mt-5 flex-none block">
+                                <h2 class="text-2xl font-bold">Gallery</h2>
+                                <div class="carousel w-full">
+                                    {gallery.map(image => (
+                                            <div class="carousel-item flex flex-col w-full" id={`image-${gallery.indexOf(image)}`}>
+                                                <img src={image.url} alt={image.description} class="w-full object-contain"/>
+                                                <div>
+                                                    <p>{image.description}</p>
+                                                </div>
+                                            </div>
+                                    ))}
+                                </div>
+
+                                <div class="flex justify-center w-full py-2 gap-2">
+                                    {gallery.map(image => (
+                                            <a href={`#image-${gallery.indexOf(image)}`} class="btn btn-xs ultrus_btn">{gallery.indexOf(image) + 1}</a>
+                                    ))}
+                                </div>
+                                <div>
+                                </div>
+                            </div>
+                    }
+                </div>
+            </div>
+            <div class="lg:inline-block lg:basis-1/5 block">
+                <h2 class="text-2xl font-bold">Downloads</h2>
+                {
+                    firstEightVersions.map(version => (
+                            <ModVersion version={version}></ModVersion>
+                    ))
+                }
+                {
+                    restOfVersions.length > 0 &&
+                        <div class="collapse collapse-arrow">
+                            <input type="checkbox" class="peer" />
+                            <div class="collapse-title peer-checked:hidden">
+                                Show more
+                            </div>
+                            <div class="collapse-title hidden peer-checked:block">
+                                Show less
+                            </div>
+                            <div class="collapse-content">
+                                {
+                                    restOfVersions.map(version => (
+                                            <ModVersion version={version}></ModVersion>
+                                    ))
+                                }
+                            </div>
+                        </div>
+                }
+            </div>
+        </div>
+    </div>
+
+</UltrusLayout>
+<style>
+    @tailwind base;
+    @tailwind components;
+    @tailwind utilities;
+
+    .ultrus_btn {
+        @apply bg-white border-gray-400 text-gray-800 hover:bg-purple-400;
+        @apply dark:bg-gray-800 dark:border-gray-600 dark:text-gray-200 dark:hover:bg-purple-600;
+    }
+</style>
+<style is:inline>
+#modcontainer * > img {
+    display: inline-block;
+    margin: 0;
+}
+</style>

@@ -1,0 +1,9 @@
+{
+  "order": 7,
+  "name": "Smelting Touch",
+  "image": "./images/smeltingtouch.png",
+  "github": "AutosmeltEnchant",
+  "modrinth": "smeltingtouch",
+  "curseforge": "auto-smelt-enchantment",
+  "description": "Smelting Touch adds a new enchantment, Smelting Touch, which smelts items dropped by blocks mined with the enchantment."
+}

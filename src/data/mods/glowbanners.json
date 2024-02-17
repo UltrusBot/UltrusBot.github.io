@@ -1,0 +1,9 @@
+{
+  "order": 4,
+  "name": "Glow Banners",
+  "image": "./images/glowbanners.png",
+  "github": "glow-banners",
+  "modrinth": "glow-banners",
+  "curseforge": "glow-banners",
+  "description": "Glow Banners allows you to make banners glow by right-clicking them with a glow ink sac."
+}

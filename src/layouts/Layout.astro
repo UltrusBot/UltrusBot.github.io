@@ -1,0 +1,29 @@
+---
+interface Props {
+	title: string;
+	description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content={description} />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/png" href="/images/favicon.png" />
+		<meta name="generator" content={Astro.generator} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:locale" content="en_US">
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="https://www.ultrusmods.me/">
+		<link rel="canonical" href="https://www.ultrusmods.me/">
+		<title>{title}</title>
+	</head>
+	<body>
+		<slot />
+	</body>
+</html>

@@ -1,0 +1,31 @@
+---
+import {WebpageVersion} from "../types/mod";
+interface Props {
+    version: WebpageVersion
+}
+const { version } = Astro.props
+---
+
+<div class="bg-gray-300/25 dark:bg-black/25 mt-3 rounded-2xl text-center px-3 py-1.5">
+    <p class="">{version.version}</p>
+    {
+        version.modrinthUrl &&
+            <a href={version.modrinthUrl} class="btn btn-xs mr_btn">Modrinth</a>
+    }
+    {
+        version.curseforgeUrl &&
+            <a href={version.curseforgeUrl} class="btn btn-xs cf_btn">Curseforge</a>
+    }
+</div>
+<style>
+    .ultrus_btn {
+        @apply bg-white border-gray-400 text-gray-800 ;
+        @apply dark:bg-gray-800 dark:border-gray-600 dark:text-gray-200;
+    }
+    .cf_btn {
+        @apply ultrus_btn hover:bg-curseforge;
+    }
+    .mr_btn {
+        @apply ultrus_btn hover:bg-modrinth;
+    }
+</style>

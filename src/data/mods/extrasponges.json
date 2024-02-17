@@ -1,0 +1,9 @@
+{
+  "order": 5,
+  "name": "Extra Sponges",
+  "image": "./images/extrasponges.png",
+  "github": "extrasponges",
+  "modrinth": "extrasponges",
+  "curseforge": "extra-sponges",
+  "description": "Extra Sponges adds new types of sponges to help clear out larger areas of water. It also includes a lava sponge for lava clearing."
+}

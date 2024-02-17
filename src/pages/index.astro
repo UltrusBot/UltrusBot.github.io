@@ -1,0 +1,126 @@
+---
+import ModInfo from '../components/ModInfo.astro';
+import UltrusLayout from "../layouts/UltrusLayout.astro";
+import { marked } from 'marked';
+import { Mod } from '../types/mod.ts';
+const mods: Mod[] = await Astro.glob('../data/mods/*.json');
+---
+
+<UltrusLayout title="Ultrus Mods">
+		<h1 class="text-center mt-10 font-semibold text-3xl">Released Projects</h1>
+		<h2 class="text-center font-bold text-xl text-purple-600 dark:text-purple-400">
+			<span id="total-downloads">3,000,000</span>
+			Downloads
+		</h2>
+		<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mx-0 md:mx-10">
+			{
+				mods.sort((a, b) => a.order - b.order).map(mod => (
+					<ModInfo
+						name={mod.name}
+						image={mod.image}
+						github={mod.github}
+						modrinth={mod.modrinth}
+						curseforge={mod.curseforge}
+						set:html={marked.parse(mod.description)}
+					/>
+				))
+			}
+		</div>
+</UltrusLayout>
+
+<style>
+	@tailwind base;
+	@tailwind components;
+	@tailwind utilities;
+
+	#linkIcons i {
+		@apply text-4xl
+	}
+	#linkIcons {
+		@apply my-3
+	}
+	.fa-twitter {
+		color: #1DA1F2;
+	}
+	.fa-youtube {
+		color: #EA3223
+	}
+	.fa-mastodon {
+		color: #6364FF
+	}
+	.fa-discord {
+		color: #5865F2
+	}
+	.fa-github {
+		color: #9921fe
+	}
+
+	:root {
+		--site-background-color-dark: #161618;
+		--site-background-color-stripe-dark: #261C2C;
+		--site-background-color-light: #FFF;
+		--site-background-color-stripe-light: #F9F9F9;
+		--modrinth: #00d845
+	}
+	@media (prefers-color-scheme: light) {
+		:root {
+			---modrinth: #30b27c
+		}
+	}
+	@layer utilities {
+		.striped-bg-dark {
+			background: var(--site-background-color-dark) repeating-linear-gradient(
+				45deg,
+				var(--site-background-color-dark),
+				var(--site-background-color-dark) 20px,
+				var(--site-background-color-stripe-dark) 20px,
+				var(--site-background-color-stripe-dark) 40px
+			) !important;
+		}
+	}
+	@layer utilities {
+		.striped-bg-light {
+			background: var(--site-background-color-light) repeating-linear-gradient(
+				45deg,
+				var(--site-background-color-light),
+				var(--site-background-color-light) 20px,
+				var(--site-background-color-stripe-light) 20px,
+				var(--site-background-color-stripe-light) 40px
+			) !important;
+		}
+	}
+
+	.sidebar-entry {
+		@apply my-1 hover:bg-slate-400 dark:hover:bg-neutral-600 flex
+	}
+	.sidebar-entry a {
+		@apply flex-1 py-1
+	}
+
+</style>
+<script is:inline>
+	// Get the total-downloads element
+	var totalDownloads = document.getElementById('total-downloads');
+	// Grab the json from
+	// https://raw.githubusercontent.com/UltrusBot/DownloadCounter/main/out/ultrusbot.json
+	// and parse it
+	fetch(
+		'https://raw.githubusercontent.com/UltrusBot/DownloadCounter/main/out/ultrusbot' +
+		'.json'
+	)
+		.then(response => response.json())
+		.then(data => {
+			// Set the total-downloads element's innerHTML to the total downloads
+			let total = 0;
+			for (let mod in data) {
+				total += data[mod];
+			}
+			if (totalDownloads) {
+				totalDownloads.innerHTML = total.toLocaleString();
+			}
+		});
+</script>
+
+<style>
+
+</style>

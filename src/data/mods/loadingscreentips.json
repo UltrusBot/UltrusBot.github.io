@@ -1,0 +1,9 @@
+{
+  "order": 6,
+  "name": "Loading Screen Tips",
+  "image": "./images/loadingscreentips.png",
+  "github": "loadingscreentips",
+  "modrinth": "loadingscreentips",
+  "curseforge": "loading-screen-tips",
+  "description": "Loading Screen Tips adds useful tips to the loading screen, which can be customized through resource packs."
+}

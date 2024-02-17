@@ -1,0 +1,90 @@
+---
+import ModInfo from '../components/ModInfo.astro';
+import UltrusLayout from "../layouts/UltrusLayout.astro";
+import { marked } from 'marked';
+import { Mod } from '../types/mod.ts';
+const mods: Mod[] = await Astro.glob('../data/mods/*.json');
+const modMap = new Map(mods.map(mod => [mod.modrinth, mod]));
+---
+
+<UltrusLayout title="Ultrus Mods">
+    <div class="text-center">
+        <h1 class="text-4xl font-bold">404 page not found</h1>
+        <p class="text-lg">The page you are looking for does not exist.</p>
+    </div>
+</UltrusLayout>
+
+<style>
+    @tailwind base;
+    @tailwind components;
+    @tailwind utilities;
+
+    #linkIcons i {
+        @apply text-4xl
+    }
+    #linkIcons {
+        @apply my-3
+    }
+    .fa-twitter {
+        color: #1DA1F2;
+    }
+    .fa-youtube {
+        color: #EA3223
+    }
+    .fa-mastodon {
+        color: #6364FF
+    }
+    .fa-discord {
+        color: #5865F2
+    }
+    .fa-github {
+        color: #9921fe
+    }
+
+    :root {
+        --site-background-color-dark: #161618;
+        --site-background-color-stripe-dark: #261C2C;
+        --site-background-color-light: #FFF;
+        --site-background-color-stripe-light: #F9F9F9;
+        --modrinth: #00d845
+    }
+    @media (prefers-color-scheme: light) {
+        :root {
+            ---modrinth: #30b27c
+        }
+    }
+    @layer utilities {
+        .striped-bg-dark {
+            background: var(--site-background-color-dark) repeating-linear-gradient(
+                    45deg,
+                    var(--site-background-color-dark),
+                    var(--site-background-color-dark) 20px,
+                    var(--site-background-color-stripe-dark) 20px,
+                    var(--site-background-color-stripe-dark) 40px
+            ) !important;
+        }
+    }
+    @layer utilities {
+        .striped-bg-light {
+            background: var(--site-background-color-light) repeating-linear-gradient(
+                    45deg,
+                    var(--site-background-color-light),
+                    var(--site-background-color-light) 20px,
+                    var(--site-background-color-stripe-light) 20px,
+                    var(--site-background-color-stripe-light) 40px
+            ) !important;
+        }
+    }
+
+    .sidebar-entry {
+        @apply my-1 hover:bg-slate-400 dark:hover:bg-neutral-600 flex
+    }
+    .sidebar-entry a {
+        @apply flex-1 py-1
+    }
+
+</style>
+
+<style>
+
+</style>

@@ -1,0 +1,8 @@
+{
+  "order": 1,
+  "name": "Mob Origins",
+  "image": "./images/moborigins.png",
+  "github": "MobOrigins",
+  "modrinth": "moborigins",
+  "curseforge": "mob-origins",
+  "description": "Mob Origins is an origins addon that currently adds over 10 unique origins, each with different powers and abilities. If you are looking to use some powers from this in a datapack, you can check out the [wiki](https://moborigins.readthedocs.io/en/latest/)."}

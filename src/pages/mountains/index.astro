@@ -1,0 +1,213 @@
+---
+import Layout from "../../layouts/Layout.astro";
+---
+<Layout title="Mountain Generator">
+    <div id="canvasholder" class="w-5">
+    </div>
+</Layout>
+<script src="https://cdn.jsdelivr.net/npm/p5@1.4.2/lib/p5.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.9/dat.gui.min.js" integrity="sha512-WoO4Ih0CDOSLYafy22wZD/mcJ7k0ESLqtQsFa6zFKnEUrbtuGU+GkLtVhgt93xa2qewG5gKEC6CWlN8OaCTSVg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script is:inline>
+    const options = {
+        end: '#cba5b2',
+        middle: '#2f244f',
+        start: '#0e0920',
+        skyTop: '#93839e',
+        skyBottom: '#e8ae9a',
+        skyMultiplier: 5,
+        xChangeMin: 5,
+        xChangeMax: 30,
+        yChangeMin: -10,
+        yChangeMax: 10,
+        ranges: 4,
+        stars: 100,
+        seed: 0,
+
+        showSatellite: false,
+        satelliteColor: "#fff",
+        satelliteSize: 75,
+        satelliteX: 50,
+        satelliteY: 50,
+        haloSize: 50,
+        haloColor: "#fff",
+
+        "Refresh Image": function() {
+            generateMountains();
+        },
+        "Randomize Seed": function() {
+            options.seed = random(0, 1000000);
+            randomSeed(options.seed);
+            generateMountains();
+            gui.updateDisplay();
+        },
+
+        "Save Image": function() {
+            saveCanvas("mountains", "png");
+        },
+        "Copy Shareable Link": function() {
+            writeOptionsToUrl();
+            navigator.clipboard.writeText(window.location.href);
+        }
+    }
+
+
+
+    const gui = new dat.GUI();
+    let guiOptions = [
+        gui.addColor(options, "end"),
+        gui.addColor(options, "middle"),
+        gui.addColor(options, "start"),
+        gui.addColor(options, "skyTop"),
+        gui.addColor(options, "skyBottom"),
+        gui.add(options, "skyMultiplier"),
+        gui.add(options, "xChangeMin"),
+        gui.add(options, "xChangeMax"),
+        gui.add(options, "yChangeMin"),
+        gui.add(options, "yChangeMax"),
+        gui.add(options, "ranges"),
+
+        gui.add(options, "stars"),
+
+        gui.add(options, "seed"),
+
+        gui.add(options, "showSatellite"),
+        gui.addColor(options, "satelliteColor"),
+        gui.add(options, "satelliteSize"),
+        gui.add(options, "satelliteX", 0, 100),
+        gui.add(options, "satelliteY", 0, 100),
+        gui.add(options, "haloSize"),
+        gui.addColor(options, "haloColor"),
+
+
+        gui.add(options, "Randomize Seed"),
+        gui.add(options, "Refresh Image"),
+        gui.add(options, "Save Image"),
+        gui.add(options, "Copy Shareable Link")
+    ]
+    guiOptions.forEach((option) => {
+        option.onChange(() => {
+            generateMountains();
+        })
+    });
+
+    let urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has("options")) {
+        decodeOptions(urlParams.get("options"));
+    }
+    function writeOptionsToUrl() {
+        let url = "?" + encodeOptions();
+        window.history.pushState({}, "", url);
+    }
+    function tripleLerpColor(col1, col2,col3, percent) {
+        if (percent < 0.5) {
+            return lerpColor(col1, col2, percent*2);
+        } else {
+            return lerpColor(col2, col3, (percent-0.5)*2);
+        }
+    }
+    function setup() {
+        createCanvas(displayWidth, displayHeight);
+        strokeWeight(3)
+        document.getElementById("canvasholder").appendChild(document.getElementsByTagName("canvas")[0]);
+        generateMountains()
+    }
+    function generateMountains() {
+        for (let y = 0; y < height; y++) {
+            stroke(lerpColor(color(options.skyTop), color(options.skyBottom), (float)(y * options.skyMultiplier)/height));
+            line(0, y, width, y);
+        }
+        noStroke();
+        seeds = [];
+        randomSeed(options.seed);
+        // Generates a unique seed for each generator: stars, mountains, trees
+        for (let i = 0; i < 3; i++) {
+            seeds.push(random(0, 1000000));
+        }
+        randomSeed(seeds[0]);
+        for (let i = 0; i < options.stars; i++) {
+            fill(255, 255, 255, random(0, 255));
+            circle(random(0, width), random(0, height/3), random(2, 4));
+        }
+
+        if (options.showSatellite) {
+            for (let i = 0; i < options.haloSize; i++) {
+                let col = color(options.haloColor);
+                col.setAlpha((options.haloSize - i)/options.haloSize * 10);
+                fill(col);
+                circle((options.satelliteX/100)*width, (options.satelliteY/100)*height, options.satelliteSize + i);
+
+            }
+            fill(options.satelliteColor);
+            circle((options.satelliteX/100)*width, (options.satelliteY/100)*height, options.satelliteSize);
+        }
+
+
+        randomSeed(seeds[1]);
+        for (let i = 0; i < options.ranges; i++) {
+            let curY = (height/3) + ((height/(options.ranges*2)) * Math.pow(i, 1.1));
+            let curX = 0;
+            fill(tripleLerpColor(color(options.start), color(options.middle), color(options.end), (options.ranges - i)/options.ranges));
+            let trees = i > options.ranges - 3;
+            treePoints = [];
+            beginShape();
+            vertex(0, height);
+            vertex(curX, curY);
+            while (curX < width) {
+                let prevX = curX;
+                let prevY = curY;
+                curY += random(options.yChangeMin, options.yChangeMax);
+                curX += random(options.xChangeMin, options.xChangeMax);
+                vertex(curX, curY);
+                if (trees) {
+                    treePoints.push(createVector(prevX, prevY));
+                }
+            }
+            vertex(width, height);
+            endShape(CLOSE);
+            for (let point of treePoints) {
+                let treeWidth = random(15, 30);
+                triangle(point.x - treeWidth/2, point.y + 10, point.x, point.y - 30, point.x + treeWidth/2, point.y + 10);
+            }
+        }
+    }
+
+    function encodeOptions() {
+        let json = {}
+        for (let option of guiOptions) {
+            if (typeof option !== "function") {
+                json[option.property] = options[option.property];
+            }
+        }
+        return btoa(JSON.stringify(json));
+    }
+    function decodeOptions(str) {
+        let json = JSON.parse(atob(str));
+        // for (let option of guiOptions) {
+        //     if (typeof option !== "function") {
+        //         options[option.property] = json[option.property];
+        //     }
+        // }
+        for (let key in json) {
+            if (options.hasOwnProperty(key) && typeof options[key] !== "function") {
+                options[key] = json[key];
+            }
+        }
+        gui.updateDisplay();
+    }
+
+    function keyPressed() {
+        if (keyCode === 32) {
+            generateMountains();
+        }
+    }
+</script>
+<style is:inline>
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #000;
+}
+button, input, optgroup, select, textarea {
+    line-height: revert;
+}
+</style>

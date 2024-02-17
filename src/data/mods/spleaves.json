@@ -1,0 +1,9 @@
+{
+  "order": 9,
+  "name": "Spleaves",
+  "image": "./images/spleaves.png",
+  "github": "spleaves",
+  "modrinth": "spleaves",
+  "curseforge": "spleaves",
+  "description": "Spleaves re-implements the spleaves from the 2023 April Fools Update and adds some new features to them!"
+}

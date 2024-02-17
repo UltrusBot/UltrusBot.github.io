@@ -1,0 +1,10 @@
+{
+  "order": 2,
+  "name": "Missing Wilds",
+  "image": "./images/missingwilds.png",
+  "github": "missing-wilds",
+  "modrinth": "missing-wilds",
+  "curseforge": "missing-wilds",
+  "curseforge_id": 622590,
+  "description": "Missing Wilds strives to add all the content that was dropped or scrapped from the Wild Update. This includes things like fallen logs, and the birch forest changes from the concept art shown at Minecraft Live 2021."
+}
