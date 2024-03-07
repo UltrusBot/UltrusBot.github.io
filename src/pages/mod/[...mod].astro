@@ -77,7 +77,11 @@ versions.sort((a, b) => b.date_published - a.date_published);
 ---
 <UltrusLayout title={modData.title} description={modData.description}>
     <div class="leading-6 mt-3 mx-auto w-5/6 bg-slate-400/10 dark:bg-black/25 min-h-screen p-4">
-        <ModNavBar url={Astro.url.toString().replace("/versions", "")} key="versions"></ModNavBar>
+        <ModNavBar
+                url={Astro.url.toString().replace("/versions", "")}
+                wiki={modInfo.wiki_url}
+                key="versions"
+        ></ModNavBar>
         <div class="flex flex-col lg:flex-row">
             <div class="lg:inline-block lg:basis-1/5 block">
                 <h2 class="text-2xl font-bold">Versions</h2>

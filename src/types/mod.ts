@@ -16,6 +16,9 @@ export interface Mod {
     description: string;
     gallery: GalleryImage[];
     order: number;
+    wiki_url: string;
+    source_url: string;
+    issues_url: string;
 }
 
 export interface File {

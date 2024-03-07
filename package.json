@@ -10,6 +10,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@11ty/eleventy-fetch": "^4.0.0",
     "@astrojs/tailwind": "^5.1.0",
     "astro": "^3.5.3",
     "marked": "^10.0.0",
