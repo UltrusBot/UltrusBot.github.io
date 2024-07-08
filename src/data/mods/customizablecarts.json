@@ -1,0 +1,9 @@
+{
+  "order": 12,
+  "name": "Customizable Carts",
+  "image": "./images/customizable_carts.png",
+  "github": "CustomizableCarts",
+  "modrinth": "customizable-carts",
+  "curseforge": "customizable-carts",
+  "description": "Customizable Carts adds a variety of new minecart designs that can be customized with various parts."
+}
