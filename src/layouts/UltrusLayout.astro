@@ -3,12 +3,14 @@ import Layout from "./Layout.astro";
 interface Props {
     title: string;
     description: string;
+    embed_image?: string;
+    embed_color?: string;
 }
 
-const { title, description  } = Astro.props;
+const { title, description, embed_image, embed_color  } = Astro.props;
 ---
 
-<Layout title={title} description={description}>
+<Layout title={title} description={description} embed_image={embed_image} embed_color={embed_color}>
     <div class="striped-bg-light dark:striped-bg-dark w-screen min-h-screen text-gray-800 dark:text-white flex flex-col md:flex-row">
         <aside class="hidden md:inline bg-slate-300 dark:bg-neutral-900 w-1/6 h-auto text-center basis-1/6 drop-shadow-lg">
             <div class="pt-5">
@@ -99,7 +101,7 @@ const { title, description  } = Astro.props;
     } else {
         document.documentElement.classList.remove('dark')
     }
-    function toggleTheme() {
+    function toggleTheme(event: MouseEvent) {
         document.documentElement.classList.toggle('dark')
         if (event.shiftKey) {
             localStorage.removeItem('theme')

@@ -66,8 +66,13 @@ versions.sort((a, b) => b.date_published - a.date_published);
 let firstEightVersions = versions.slice(0, 8);
 let restOfVersions = versions.slice(8);
 
+
+function intColorToHex(color: number): string {
+    return "#" + color.toString(16).padStart(6, "0");
+}
+
 ---
-<UltrusLayout title={modData.title} description={modData.description}>
+<UltrusLayout title={modData.title} description={modData.description} embed_image={modData.icon_url} embed_color={intColorToHex(modData.color)}>
 
     <div class="leading-6 mt-3 mx-auto w-5/6 bg-slate-400/10 dark:bg-black/25 min-h-screen p-4">
         <ModNavBar url={Astro.url} modData={modData} key="description"></ModNavBar>

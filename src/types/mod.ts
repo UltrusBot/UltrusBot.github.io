@@ -19,6 +19,8 @@ export interface Mod {
     wiki_url: string;
     source_url: string;
     issues_url: string;
+    icon_url: string
+    color: number;
 }
 
 export interface File {

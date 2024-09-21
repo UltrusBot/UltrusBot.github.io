@@ -2,9 +2,11 @@
 interface Props {
 	title: string;
 	description: string;
+	embed_image?: string;
+	embed_color?: string;
 }
 
-const { title, description } = Astro.props;
+const { title, description, embed_image, embed_color } = Astro.props;
 ---
 
 <!doctype html>
@@ -17,6 +19,8 @@ const { title, description } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
+		{ embed_image && <meta property="og:image" content={embed_image} /> }
+		{ embed_color && <meta property="theme-color" content={embed_color} /> }
 		<meta property="og:locale" content="en_US">
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content="https://www.ultrusmods.me/">
