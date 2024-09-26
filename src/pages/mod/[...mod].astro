@@ -80,9 +80,16 @@ function intColorToHex(color: number): string {
 ---
 <UltrusLayout title={modData.title} description={modData.description} embed_image={modData.icon_url} embed_color={intColorToHex(modData.color)}>
     <div class="leading-6 mt-3 mx-auto w-5/6 bg-slate-400/10 dark:bg-black/25 min-h-screen p-4">
+        <div class="flex flex-row border border-transparent border-b-slate-500 mb-3">
+            <img src={"../../" +modInfo.image} alt={modData.title} class="h-32 w-32"/>
+            <div class="ml-5">
+                <h1 class="text-4xl font-bold">{modData.title}</h1>
+                <p class="text-lg">{modData.description}</p>
+            </div>
+        </div>
         <ModNavBar
                 url={Astro.url.toString().replace("/versions", "")}
-                wiki={modInfo.wiki_url}
+                modData={modData}
                 key="versions"
         ></ModNavBar>
         <div class="flex flex-col lg:flex-row">
