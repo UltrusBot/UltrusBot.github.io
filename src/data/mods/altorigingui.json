@@ -1,7 +1,7 @@
 {
   "order": 10,
   "name": "Alt Origin Gui",
-  "image": "./images/altorigingui.png",
+  "image": "/images/altorigingui.png",
   "github": "AltOriginGui",
   "modrinth": "altorigingui",
   "curseforge": "altorigingui",

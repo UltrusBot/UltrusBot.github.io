@@ -1,7 +1,7 @@
 {
   "order": 2,
   "name": "Missing Wilds",
-  "image": "./images/missingwilds.png",
+  "image": "/images/missingwilds.png",
   "github": "missing-wilds",
   "modrinth": "missing-wilds",
   "curseforge": "missing-wilds",

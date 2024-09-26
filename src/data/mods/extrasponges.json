@@ -1,7 +1,7 @@
 {
   "order": 5,
   "name": "Extra Sponges",
-  "image": "./images/extrasponges.png",
+  "image": "/images/extrasponges.png",
   "github": "extrasponges",
   "modrinth": "extrasponges",
   "curseforge": "extra-sponges",

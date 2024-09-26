@@ -1,7 +1,7 @@
 {
   "order": 6,
   "name": "Loading Screen Tips",
-  "image": "./images/loadingscreentips.png",
+  "image": "/images/loadingscreentips.png",
   "github": "loadingscreentips",
   "modrinth": "loadingscreentips",
   "curseforge": "loading-screen-tips",

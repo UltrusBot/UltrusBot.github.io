@@ -1,7 +1,7 @@
 {
   "order": 9,
   "name": "Spleaves",
-  "image": "./images/spleaves.png",
+  "image": "/images/spleaves.png",
   "github": "spleaves",
   "modrinth": "spleaves",
   "curseforge": "spleaves",

@@ -1,7 +1,7 @@
 {
   "order": 12,
   "name": "Customizable Carts",
-  "image": "./images/customizable_carts.png",
+  "image": "/images/customizable_carts.png",
   "github": "CustomizableCarts",
   "modrinth": "customizable-carts",
   "curseforge": "customizable-carts",

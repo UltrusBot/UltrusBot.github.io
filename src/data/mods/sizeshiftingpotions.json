@@ -1,7 +1,7 @@
 {
   "order": 3,
   "name": "Size Shifting Potions",
-  "image": "./images/sizeshiftingpotions.png",
+  "image": "/images/sizeshiftingpotions.png",
   "github": "sizeshiftingpotions",
   "modrinth": "sizeshiftingpotions",
   "curseforge": "size-shifting-potions",
