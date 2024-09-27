@@ -21,6 +21,8 @@ export interface Mod {
     issues_url: string;
     icon_url: string
     color: number;
+    loaders: string[];
+    categories: string[]
 }
 
 export interface File {
