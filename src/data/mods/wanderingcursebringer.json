@@ -1,0 +1,10 @@
+{
+  "order": 10,
+  "name": "Wandering Cursebringer",
+  "image": "/images/wanderingcursebringer.png",
+  "github": "wandering-cursebringer",
+  "modrinth": "wandering-cursebringer",
+  "curseforge": "wandering-cursebringer",
+  "curseforge_id": 1129770,
+  "description": "Adds the Wandering Cursebringer, a new mob that sells you curses you can use on yourself to give yourself more of a challenge."
+}
