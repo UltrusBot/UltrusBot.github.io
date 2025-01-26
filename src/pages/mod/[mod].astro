@@ -1,7 +1,8 @@
 ---
 import { marked } from 'marked';
+import { Image } from 'astro:assets';
 import UltrusLayout from "../../layouts/UltrusLayout.astro";
-import {getCFVersions, getMRProject, getMRVersions} from "../../utils/ModHelper";
+import {getCFProject, getCFVersions, getMRProject, getMRVersions} from "../../utils/ModHelper";
 import {GalleryImage, Version, Mod, WebpageVersion} from "../../types/mod";
 import ModNavBar from "../../components/ModNavBar.astro";
 import ModVersion from "../../components/ModVersion.astro";
@@ -14,6 +15,7 @@ const modInfo = mods.find(mod => mod.modrinth === Astro.params.mod);
 const { mod } = Astro.params;
 
 const modData = await getMRProject(mod);
+const curseforgeProject = await getCFProject(modInfo.curseforge);
 const gallery: GalleryImage[] = modData.gallery;
 gallery.sort((a, b) => a.ordering - b.ordering);
 
@@ -78,7 +80,7 @@ function intColorToHex(color: number): string {
 
     <div class="leading-6 mt-3 mx-auto w-5/6 bg-slate-400/10 dark:bg-black/25 min-h-screen p-4">
         <div class="flex flex-row border border-transparent border-b-slate-500 mb-3 pb-2">
-            <img src={modInfo.image} alt={modData.title} class="h-32 w-32"/>
+            <Image src={curseforgeProject.icon_url} alt={modData.title} class="h-32 w-32"  width=256 height=256 />
             <div class="ml-5">
                 <h1 class="text-4xl font-bold">{modData.title}</h1>
                 <p class="text-lg">{modData.description}</p>

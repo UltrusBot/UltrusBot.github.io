@@ -3,12 +3,13 @@ import EleventyFetch from "@11ty/eleventy-fetch";
 
 const CF_PROJECT_URL = `https://curserinth-api.kuylar.dev/v2/project/mod__`
 const MR_PROJECT_URL = `https://api.modrinth.com/v2/project/`
-const modCache = new Map<string, Mod>()
+const modCacheCF = new Map<string, Mod>()
+const modCacheMR = new Map<string, Mod>()
 const versionCache = new Map<string, Version[]>()
 
-export function getCFProject(projectName: string) {
-    if (modCache.has(projectName)) {
-        return Promise.resolve(modCache.get(projectName))
+export function getCFProject(projectName: string): Promise<Mod> {
+    if (modCacheCF.has(projectName)) {
+        return Promise.resolve(modCacheCF.get(projectName))
     }
     return EleventyFetch(`${CF_PROJECT_URL}${projectName}`, {
         duration: "1h",
@@ -16,20 +17,24 @@ export function getCFProject(projectName: string) {
     })
         .then(data => data as Mod)
         .then(mod => {
-            modCache.set(projectName, mod)
+            modCacheCF.set(projectName, mod)
             return mod
         })
 }
 
-export function getMRProject(projectName: string) {
-    if (modCache.has(projectName)) {
-        return Promise.resolve(modCache.get(projectName))
+export function getMRProject(projectName: string): Promise<Mod> {
+    if (modCacheMR.has(projectName)) {
+        return Promise.resolve(modCacheMR.get(projectName))
     }
     return EleventyFetch(`${MR_PROJECT_URL}${projectName}`, {
         duration: "1h",
         type: "json"
     })
         .then(data => data as Mod)
+        .then(mod => {
+            modCacheMR.set(projectName, mod)
+            return mod
+        })
 
 }
 export async function getCFVersions(projectName: string) {

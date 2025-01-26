@@ -1,17 +1,22 @@
 ---
+import {getCFProject, getMRProject} from "../utils/ModHelper";
+import { Image } from 'astro:assets';
+import {Mod} from "../types/mod";
 interface Props {
     name: string;
-    image: string;
     modrinth: string;
     curseforge: string;
     github: string;
 }
-const { name, image, modrinth, curseforge, github } = Astro.props;
+const { name, modrinth, curseforge, github } = Astro.props;
+
+const cfproject: Mod = await getCFProject(curseforge);
+
 ---
 <div class="bg-slate-300 dark:bg-zinc-700 mt-5 p-4 rounded-md mx-2.5 hover:shadow-md hover:shadow-neutral-500 flex flex-col">
     <div class="flex flex-row grow">
         <a href={`/mod/${modrinth}`} class="min-w-fit">
-            <img src={image} class="w-32 h-32 drop-shadow-lg rounded-lg bg-slate-200 dark:bg-zinc-600 border border-slate-100 dark:border-zinc-500" alt="Mob Origins Icon">
+            <Image src={cfproject.icon_url} class="w-32 h-32 drop-shadow-lg rounded-lg bg-slate-200 dark:bg-zinc-600 border border-slate-100 dark:border-zinc-500" width=256 height=256 alt=`${name} icon` />
         </a>
         <div class="ml-2">
             <h1 class="font-bold my-2 text-lg"><a href={`/mod/${modrinth}`}>{name}</a></h1>

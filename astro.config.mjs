@@ -6,6 +6,12 @@ import tailwind from "@astrojs/tailwind";
 export default defineConfig({
   integrations: [tailwind()],
   site: "https://www.ultrusmods.me",
+  image: {
+    domains: [
+      "cdn.modrinth.com",
+      "media.forgecdn.net"
+    ]
+  },
   markdown: {
     shikiConfig: {
       theme: "dracula",

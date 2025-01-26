@@ -1,7 +1,6 @@
 {
   "order": 7,
   "name": "Smelting Touch",
-  "image": "/images/smeltingtouch.png",
   "github": "AutosmeltEnchant",
   "modrinth": "smeltingtouch",
   "curseforge": "auto-smelt-enchantment",
